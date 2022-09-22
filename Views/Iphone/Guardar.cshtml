@@ -1,0 +1,65 @@
+﻿@model TiendaIphone.Models.Iphone
+@{
+    ViewData["Title"] = "Guardar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="card-body">
+    <!--Formularios de recepcion de datos-->
+    <form method="post" asp-action="Guardar" asp-controller="Iphone">
+        <!--Validacion-->
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <!--Campos-->
+
+        <div class="container" style="padding:30px">
+            <div class="form-group">
+                <label asp-for="Modelo" class="form-label">Modelo</label>
+                <input asp-for="Modelo" class="form-control" type="text" placeholder="Ingrese modelo ..." />
+                <span asp-validation-for="Modelo" class="text-danger" />
+            </div>
+        </div>
+        <div class="container" style="padding:30px">
+            <div class="form-group">
+                <label asp-for="EstadoIphone" class="form-label">Estado</label>
+                <input asp-for="EstadoIphone" class="form-control" type="text"placeholder="Especifique el estado del celular: Usado, Reacondicionado, Sellado." />
+                <span asp-validation-for="EstadoIphone" class="text-danger" />
+            </div>
+        </div>
+        <div class="container" style="padding:30px">
+            <div class="form-group">
+                <label asp-for="ColorIphone" class="form-label">Color</label>
+                <input asp-for="ColorIphone" class="form-control" type="text" placeholder="Especifique el color: Blanco, Negro, Rojo, Dorado, Plata." />
+                <span asp-validation-for="ColorIphone" class="text-danger" />
+            </div>
+        </div>
+        <div class="container" style="padding:30px">
+            <div class="form-group">
+                <label asp-for="Descripcion" class="form-label">Descripcion</label>
+                <input asp-for="Descripcion" class="form-control" type="text" placeholder="Ingrese una descripción del celular ..." />
+                <span asp-validation-for="Descripcion" class="text-danger" />
+            </div>
+        </div>
+
+        <div class="container" style="padding:30px">
+            <div class="form-group">
+                <label asp-for="Precio" class="form-label">Precio</label>
+                <input asp-for="Precio" class="form-control" type="text" placeholder="Ingrese el precio ..." />
+                <span asp-validation-for="Precio" class="text-danger" />
+            </div>
+        </div>
+
+        <div class="container" style="padding:30px">
+            <div class="form-group">
+                <label asp-for="TiendaID" class="form-label" >ID Tienda</label>
+                <input asp-for="TiendaID" class="form-control" type="text" placeholder="ID de la tienda: 1" />
+                <span asp-validation-for="TiendaID" class="text-danger" />
+            </div>
+        </div>
+        <!--Botones para enviar los datos y volver al listado-->
+
+        <div class="container" style="padding:30px">
+            <div class="form-group">
+                <input type="submit" value="Guardar" class="btn btn-success form-control" />
+            </div>
+        </div>
+    </form>
+</div>

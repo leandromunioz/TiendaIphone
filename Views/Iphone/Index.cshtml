@@ -1,0 +1,88 @@
+﻿@model IEnumerable<TiendaIphone.Models.Iphone>
+@using Microsoft.AspNetCore.Identity;
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<center>
+    <div class="img-container">
+        <img src="~/css/logoBAiPhoneSINcelu.png" alt="Iphone stock" />
+    </div>
+</center>
+
+<h1> Sistema de gestión</h1>
+@if (User.IsInRole("Admin") || User.IsInRole("SuperAdmin"))
+{
+    <div>
+        <a class="btn btn-secondary" style="background-color:green" asp-area="" asp-controller="Iphone" asp-action="Guardar">Añadir nuevo iPhone</a>
+    </div>
+}
+
+
+<div class="card-body">
+
+    <!--Formularios para eliminar datos-->
+    @if (Model.Count() > 0)
+    {
+        <!--Muestra en una tabla los nombres de las columnas-->
+        <table class="table table-striped border">
+            <tr class="table-secondary">
+                <th>@Html.DisplayNameFor(m => m.First().IphoneID)</th>
+                <th>@Html.DisplayNameFor(m => m.First().Modelo)</th>
+                <th>@Html.DisplayNameFor(m => m.First().EstadoIphone)</th>
+                <th>@Html.DisplayNameFor(m => m.First().ColorIphone)</th>
+                <th>@Html.DisplayNameFor(m => m.First().Descripcion)</th>
+                <th>@Html.DisplayNameFor(m => m.First().Precio)</th>          
+                <th>Acciones</th>
+            </tr>
+            <!--Muestra en la misma tabla los resgistros de las columnas-->
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.IphoneID</td>
+                    <td>@item.Modelo</td>
+                    <td>@item.EstadoIphone</td>
+                    <td>@item.ColorIphone</td>
+                    <td>@item.Descripcion</td>
+                    <td>US$ @item.Precio</td>
+                    <td>
+                        <!--Acciones de edicion y eliminado-->
+                        @if (User.IsInRole("Admin") || User.IsInRole("SuperAdmin"))
+                        {
+
+                            <a asp-route-id="@item.IphoneID"
+                   asp-action="Editar"
+                   asp-asp-controller="Iphone"
+                   class="btn btn-secondary" >Editar</a>
+
+                        }
+
+                        @if (User.IsInRole("SuperAdmin"))
+
+                        {
+                            <a asp-route-id="@item.IphoneID"
+                            
+                   asp-action="Eliminar"
+                   asp-controller="Iphone"
+                   class ="btn btn-secondary" style="background-color:red">Eliminar</a>
+
+
+                        }
+
+                    </td>
+
+                </tr>
+                
+            }
+        </table>
+       
+        <!--Respuesta por defecto-->
+    }
+    else
+    {
+        <p> Registro de Iphone vacío.</p>
+    }
+</div>

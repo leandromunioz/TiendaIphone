@@ -1,0 +1,31 @@
+﻿@model TiendaIphone.Models.Iphone
+@{
+    ViewData["Title"] = "Eliminar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card-body">
+            <!--Formularios de recepcion de datos-->
+    <form method="post" asp-action="Eliminar" asp-controller="Iphone">
+        <!--Campo secreto-->
+        <input type="hidden" asp-for="IphoneID" />
+        <!--Validacion-->
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <!--Campos-->
+
+        <div class="container" style="padding:30px">
+            <div class="form-group">
+                <label asp-for="Modelo" class="form-label">Titulo</label>
+                <input asp-for="Modelo" class="form-control" type="text" disabled />
+                <span asp-validation-for="Modelo" class="text-danger" />
+            </div>
+        </div>
+                        <!--Botones para enviar los datos y volver al listado-->
+
+        <div class="container" style="padding:30px">
+            <div class="form-group">
+                <input type="submit" value="Eliminar" class="btn btn-danger form-control" />
+            </div>
+        </div> 
+    </form>
+</div>
