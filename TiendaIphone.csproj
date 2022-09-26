@@ -7,7 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="wwwroot\css\IphoneLogo.png" />
+    <None Include="wwwroot\lib\Images\BAiPhone.png" />
+    <None Include="wwwroot\lib\Images\favicon.jpg" />
+    <None Include="wwwroot\lib\Images\faviconIphone.png" />
+    <None Include="wwwroot\lib\Images\IphoneLogo.png" />
+    <None Include="wwwroot\lib\Images\logoBAiPhoneSINcelu.png" />
+    <None Include="wwwroot\lib\Images\StockIphone %284%29.png" />
   </ItemGroup>
 
   <ItemGroup>

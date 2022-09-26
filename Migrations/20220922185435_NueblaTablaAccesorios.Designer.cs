@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TiendaIphone.Context;
 
@@ -10,9 +11,10 @@ using TiendaIphone.Context;
 namespace TiendaIphone.Migrations
 {
     [DbContext(typeof(TiendaContext))]
-    partial class TiendaContextModelSnapshot : ModelSnapshot
+    [Migration("20220922185435_NueblaTablaAccesorios")]
+    partial class NueblaTablaAccesorios
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -107,23 +109,6 @@ namespace TiendaIphone.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("Tienda", (string)null);
-                });
-
-            modelBuilder.Entity("TiendaIphone.Models.Usuario", b =>
-                {
-                    b.Property<string>("UsuarioContrasenia")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UsuarioEmail")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UsuarioNombre")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UsuarioRol")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.ToTable("Usuario", (string)null);
                 });
 
             modelBuilder.Entity("TiendaIphone.Models.AccesoriosiPhone", b =>

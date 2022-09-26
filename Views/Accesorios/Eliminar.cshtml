@@ -1,14 +1,14 @@
-﻿@model TiendaIphone.Models.Iphone
+﻿@model TiendaIphone.Models.AccesoriosiPhone
 @{
-    ViewData["Title"] = "Eliminar";
+    ViewData["Title"] = "EliminarAccesorio";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <div class="card-body">
             <!--Formularios de recepcion de datos-->
-    <form method="post" asp-action="Eliminar" asp-controller="Iphone">
+    <form method="post" asp-action="Eliminar" asp-controller="Accesorios">
         <!--Campo secreto-->
-        <input type="hidden" asp-for="IphoneID" />
+        <input type="hidden" asp-for="AccesorioID" />
         <!--Validacion-->
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <!--Campos-->

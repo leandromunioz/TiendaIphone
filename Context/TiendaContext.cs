@@ -8,13 +8,15 @@ namespace TiendaIphone.Context
     {
         public DbSet<Tienda> Tienda { get; set; }
         public DbSet<Iphone> Iphones { get; set; }
-
+        public DbSet<AccesoriosiPhone> Accesorios { get; set; }
+        public DbSet<Usuario> Usuarios { get; set; }
         public TiendaContext(DbContextOptions<TiendaContext> options) : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             List<Tienda> tiendaInit = new List<Tienda>();
 
+            //DEFINO LAS TABLAS DE LA TIENDA CON EL MODELBUILDER
 
             modelBuilder.Entity<Tienda>(tienda =>
             {
@@ -46,6 +48,43 @@ namespace TiendaIphone.Context
 
 
             });
+
+
+            List<AccesoriosiPhone> accesoriosInit = new List<AccesoriosiPhone>();
+
+            modelBuilder.Entity<AccesoriosiPhone>(accesorios =>
+            {
+                accesorios.ToTable("Accesorios");
+
+                accesorios.HasKey(p => p.AccesorioID);
+                accesorios.HasOne(p => p.Tienda).WithMany(p => p.ListadoAccesorios).HasForeignKey(p => p.TiendaAccesorioID);
+                accesorios.Property(p => p.Modelo).IsRequired().HasMaxLength(100);
+                accesorios.Property(p => p.EstadoAccesorio);
+                accesorios.Property(p => p.ColorAccesorio);
+                accesorios.Property(p => p.Descripcion).HasMaxLength(350);
+                accesorios.Property(p => p.Precio);
+                accesorios.HasData(accesoriosInit);
+
+
+            });
+
+            List<Usuario> usuariosInit = new List<Usuario>();
+
+            modelBuilder.Entity<Usuario>(usuarios =>
+            {
+               
+                usuarios.ToTable("Usuario");
+
+                usuarios.HasNoKey();
+                usuarios.Property(p => p.UsuarioNombre);
+                usuarios.Property(p => p.UsuarioEmail);
+                usuarios.Property(p => p.UsuarioContrasenia);
+                usuarios.Property(p => p.UsuarioRol);
+                usuarios.HasData(usuariosInit);
+
+            });
+
+
         }
     }
 }

@@ -6,44 +6,42 @@ using TiendaIphone.Models;
 
 namespace TiendaIphone.Controllers
 {
-    public class IphoneController : Controller
+    public class AccesoriosController : Controller
     {
         private readonly TiendaContext _context;
 
-        public IphoneController(TiendaContext context)
+        public AccesoriosController(TiendaContext context)
         {
-            _context = context; 
+            _context = context;
         }
-
-        //Metodo Get
 
         public IActionResult Index()
         {
-            IEnumerable<Iphone> ListadoDeIphone = _context.Iphones;
-            return View(ListadoDeIphone);
+            IEnumerable<AccesoriosiPhone> ListadoDeAccesorios = _context.Accesorios;
+            return View(ListadoDeAccesorios);
         }
 
 
-        //Metodo Post
-
-        //[Authorize(Roles = "SuperAdmin")]
+        //Metodo Get
+        [Authorize(Roles = "Admin,SuperAdmin")]
         public IActionResult Guardar()
         {
             return View();
         }
+        //Metodo Post
         [HttpPost]
-        public IActionResult Guardar(Iphone iphone)
+        public IActionResult Guardar(AccesoriosiPhone accesorio)
         {
             if (ModelState.IsValid)
             {
-                var iphones = _context.Iphones;
-                iphones.Add(iphone);
+                var accesorios = _context.Accesorios;
+                accesorios.Add(accesorio);
                 _context.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View();
         }
-        //[Authorize(Roles = "SuperAdmin")]
+        [Authorize(Roles = "Admin,SuperAdmin")]
         public IActionResult Editar(int? id)
         {
             if (id == 0 || id == null)
@@ -53,29 +51,29 @@ namespace TiendaIphone.Controllers
             else
             {
                 //Devolvemos el iphone
-                var iphone = _context.Iphones.Find(id);
-                if (iphone == null)
+                var accesorio = _context.Accesorios.Find(id);
+                if (accesorio == null)
                 {
                     return NotFound("El artículo ingresado es inexistente.");
                 }
-                return View(iphone);
+                return View(accesorio);
             }
 
         }
         [HttpPost]
-        public IActionResult Editar(Iphone iphone)
+        public IActionResult Editar(AccesoriosiPhone accesorio)
         {
             if (ModelState.IsValid)
             {
 
-                var iphones = _context.Iphones;
-                iphones.Update(iphone);
+                var accesorios = _context.Accesorios;
+                accesorios.Update(accesorio);
                 _context.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View();
         }
-        //[Authorize(Roles = "SuperAdmin")]
+        [Authorize(Roles = "SuperAdmin")]
         [AllowAnonymous]
         public IActionResult Eliminar(int? id)
         {
@@ -86,34 +84,28 @@ namespace TiendaIphone.Controllers
             else
             {
                 //Devolvemos el libro
-                var iphones = _context.Iphones.Find(id);
-                if (iphones == null)
+                var accesorios = _context.Accesorios.Find(id);
+                if (accesorios == null)
                 {
                     return NotFound("El artículo ingresado es inexistente.");
                 }
-                return View(iphones);
+                return View(accesorios);
             }
 
         }
 
         [HttpPost]
-        public IActionResult Eliminar(Iphone iphone)
+        public IActionResult Eliminar(AccesoriosiPhone accesorio)
         {
             if (ModelState.IsValid)
             {
-                var libros = _context.Iphones;
-                libros.Remove(iphone);
+                var accesorios = _context.Accesorios;
+                accesorios.Remove(accesorio);
                 _context.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View();
         }
-
-
-
-
-
-
 
     }
 }

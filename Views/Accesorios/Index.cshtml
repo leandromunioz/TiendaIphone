@@ -1,4 +1,4 @@
-﻿@model IEnumerable<TiendaIphone.Models.Iphone>
+﻿@model IEnumerable<TiendaIphone.Models.AccesoriosiPhone>
 @using Microsoft.AspNetCore.Identity;
 
 @{
@@ -13,11 +13,11 @@
     </div>
 </center>
 
-<h1> Sistema de gestión | iPhones</h1>
+<h1> Sistema de gestión | Accesorios iPhone</h1>
 @if (User.IsInRole("Admin") || User.IsInRole("SuperAdmin"))
 {
     <div>
-        <a class="btn btn-secondary" style="background-color:green" asp-area="" asp-controller="Iphone" asp-action="Guardar">Añadir nuevo iPhone</a>
+        <a class="btn btn-secondary" style="background-color:green" asp-area="" asp-controller="Accesorios" asp-action="Guardar">Añadir nuevo Accesorio</a>
     </div>
 }
 
@@ -30,10 +30,10 @@
         <!--Muestra en una tabla los nombres de las columnas-->
         <table class="table table-striped border">
             <tr class="table-secondary">
-                <th>@Html.DisplayNameFor(m => m.First().IphoneID)</th>
+                <th>@Html.DisplayNameFor(m => m.First().AccesorioID)</th>
                 <th>@Html.DisplayNameFor(m => m.First().Modelo)</th>
-                <th>@Html.DisplayNameFor(m => m.First().EstadoIphone)</th>
-                <th>@Html.DisplayNameFor(m => m.First().ColorIphone)</th>
+                <th>@Html.DisplayNameFor(m => m.First().EstadoAccesorio)</th>
+                <th>@Html.DisplayNameFor(m => m.First().ColorAccesorio)</th>
                 <th>@Html.DisplayNameFor(m => m.First().Descripcion)</th>
                 <th>@Html.DisplayNameFor(m => m.First().Precio)</th>          
                 <th>Acciones</th>
@@ -42,10 +42,10 @@
             @foreach (var item in Model)
             {
                 <tr>
-                    <td>@item.IphoneID</td>
+                    <td>@item.AccesorioID</td>
                     <td>@item.Modelo</td>
-                    <td>@item.EstadoIphone</td>
-                    <td>@item.ColorIphone</td>
+                    <td>@item.EstadoAccesorio</td>
+                    <td>@item.ColorAccesorio</td>
                     <td>@item.Descripcion</td>
                     <td>US$ @item.Precio</td>
                     <td>
@@ -53,9 +53,9 @@
                         @if (User.IsInRole("Admin") || User.IsInRole("SuperAdmin"))
                         {
 
-                            <a asp-route-id="@item.IphoneID"
+                            <a asp-route-id="@item.AccesorioID"
                    asp-action="Editar"
-                   asp-asp-controller="Iphone"
+                   asp-asp-controller="Accesorios"
                    class="btn btn-secondary" >Editar</a>
 
                         }
@@ -63,10 +63,10 @@
                         @if (User.IsInRole("SuperAdmin"))
 
                         {
-                            <a asp-route-id="@item.IphoneID"
+                            <a asp-route-id="@item.AccesorioID"
                             
                    asp-action="Eliminar"
-                   asp-controller="Iphone"
+                   asp-controller="Accesorios"
                    class ="btn btn-secondary" style="background-color:red">Eliminar</a>
 
 
@@ -83,6 +83,6 @@
     }
     else
     {
-        <p> Registro de Iphone vacío.</p>
+        <p> Registro de Accesorios vacío.</p>
     }
 </div>
