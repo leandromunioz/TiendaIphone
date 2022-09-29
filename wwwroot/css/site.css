@@ -1,20 +1,20 @@
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
 
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
 }
 
 /*Login section*/
@@ -34,12 +34,21 @@ body {
     .rounded-bl-lg-5 {
         border-bottom-left-radius: 0.5rem;
     }
-
-  
 }
 
+/*/Registro sección*/
 
+.cascading-right {
+    margin-right: -50px;
+}
 
+@media (max-width: 991.98px) {
+    .cascading-right {
+        margin-right: 0;
+    }
+}
 
-
-
+.mask-custom {
+    backdrop-filter: blur(5px);
+    background-color: rgba(178, 60, 253, 0.2);
+}

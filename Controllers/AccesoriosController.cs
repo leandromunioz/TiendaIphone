@@ -6,6 +6,7 @@ using TiendaIphone.Models;
 
 namespace TiendaIphone.Controllers
 {
+    [Authorize]
     public class AccesoriosController : Controller
     {
         private readonly TiendaContext _context;
@@ -23,7 +24,7 @@ namespace TiendaIphone.Controllers
 
 
         //Metodo Get
-        [Authorize(Roles = "Admin,SuperAdmin")]
+        [Authorize(Roles = "admin,SuperAdmin")]
         public IActionResult Guardar()
         {
             return View();
@@ -41,7 +42,7 @@ namespace TiendaIphone.Controllers
             }
             return View();
         }
-        [Authorize(Roles = "Admin,SuperAdmin")]
+        [Authorize(Roles = "admin,SuperAdmin")]
         public IActionResult Editar(int? id)
         {
             if (id == 0 || id == null)

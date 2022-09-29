@@ -14,7 +14,7 @@
 </center>
 
 <h1> Sistema de gestión | iPhones</h1>
-@if (User.IsInRole("Admin") || User.IsInRole("SuperAdmin"))
+@if (User.IsInRole("admin") || User.IsInRole("SuperAdmin"))
 {
     <div>
         <a class="btn btn-secondary" style="background-color:green" asp-area="" asp-controller="Iphone" asp-action="Guardar">Añadir nuevo iPhone</a>
@@ -50,7 +50,7 @@
                     <td>US$ @item.Precio</td>
                     <td>
                         <!--Acciones de edicion y eliminado-->
-                        @if (User.IsInRole("Admin") || User.IsInRole("SuperAdmin"))
+                        @if (User.IsInRole("admin") || User.IsInRole("SuperAdmin"))
                         {
 
                             <a asp-route-id="@item.IphoneID"

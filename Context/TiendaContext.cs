@@ -75,9 +75,8 @@ namespace TiendaIphone.Context
                
                 usuarios.ToTable("Usuario");
 
-                usuarios.HasNoKey();
                 usuarios.Property(p => p.UsuarioNombre);
-                usuarios.Property(p => p.UsuarioEmail);
+                usuarios.HasKey(p => p.UsuarioEmail);
                 usuarios.Property(p => p.UsuarioContrasenia);
                 usuarios.Property(p => p.UsuarioRol);
                 usuarios.HasData(usuariosInit);

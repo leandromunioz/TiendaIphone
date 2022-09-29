@@ -50,10 +50,7 @@ namespace TiendaIphone.Controllers
                 };
 
                 //Se iteran los roles y se almacenan en los claims
-                //foreach (string rol in usuario.UsuarioRol)
-                //{
-                //    claims.Add(new Claim(ClaimTypes.Role, rol));
-                //}
+            
 
                 claims.Add(new Claim(ClaimTypes.Role, usuario.UsuarioRol));
 
@@ -68,6 +65,7 @@ namespace TiendaIphone.Controllers
             else
             {
                 return View();
+                
             }
             
         }
