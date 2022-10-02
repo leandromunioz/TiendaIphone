@@ -12,29 +12,41 @@
 
         <div class="container" style="padding:30px">
             <div class="form-group">
+                <label asp-for="TiendaAccesorioID" class="form-label">ID Tienda</label>
+                <input asp-for="TiendaAccesorioID" class="form-control" type="text" placeholder="Ingrese el ID de la tienda destino para su accesorio" />
+                <span asp-validation-for="TiendaAccesorioID" class="text-danger" />
+            </div>
+        </div>
+
+      
+
+        <div class="container" style="padding:30px">
+            <div class="form-group">
                 <label asp-for="Modelo" class="form-label">Modelo</label>
-                <input asp-for="Modelo" class="form-control" type="text" placeholder="Ingrese modelo ..." />
+                <input asp-for="Modelo" class="form-control" type="text" placeholder="Ingrese modelo " />
                 <span asp-validation-for="Modelo" class="text-danger" />
             </div>
         </div>
         <div class="container" style="padding:30px">
             <div class="form-group">
                 <label asp-for="EstadoAccesorio" class="form-label">Estado</label>
-                <input asp-for="EstadoAccesorio" class="form-control" type="text"placeholder="Especifique el estado del accesorio: Usado, Sellado." />
+                <input asp-for="EstadoAccesorio" class="form-control" type="text"placeholder="Especifique el estado del accesorio: Usado, Sellado" />
                 <span asp-validation-for="EstadoAccesorio" class="text-danger" />
             </div>
         </div>
+
         <div class="container" style="padding:30px">
             <div class="form-group">
                 <label asp-for="ColorAccesorio" class="form-label">Color</label>
-                <input asp-for="ColorAccesorio" class="form-control" type="text" placeholder="Especifique el color: Blanco, Negro." />
+                <input asp-for="ColorAccesorio" class="form-control" type="text" placeholder="Especifique el color: Blanco, Negro" />
                 <span asp-validation-for="ColorAccesorio" class="text-danger" />
             </div>
         </div>
+
         <div class="container" style="padding:30px">
             <div class="form-group">
                 <label asp-for="Descripcion" class="form-label">Descripcion</label>
-                <input asp-for="Descripcion" class="form-control" type="text" placeholder="Ingrese una descripción para el accesorio ..." />
+                <input asp-for="Descripcion" class="form-control" type="text" placeholder="Ingrese una descripción para el accesorio " />
                 <span asp-validation-for="Descripcion" class="text-danger" />
             </div>
         </div>
@@ -42,23 +54,21 @@
         <div class="container" style="padding:30px">
             <div class="form-group">
                 <label asp-for="Precio" class="form-label">Precio</label>
-                <input asp-for="Precio" class="form-control" type="text" placeholder="Ingrese el precio ..." />
+                <input asp-for="Precio" class="form-control" type="text" placeholder="Ingrese el precio " />
                 <span asp-validation-for="Precio" class="text-danger" />
             </div>
         </div>
 
-        <div class="container" style="padding:30px">
-            <div class="form-group">
-                <label asp-for="TiendaAccesorioID" class="form-label" >ID Tienda</label>
-                <input asp-for="TiendaAccesorioID" class="form-control" type="text" placeholder="ID de la tienda: 1" />
-                <span asp-validation-for="TiendaAccesorioID" class="text-danger" />
-            </div>
-        </div>
+  
+      
         <!--Botones para enviar los datos y volver al listado-->
 
         <div class="container" style="padding:30px">
             <div class="form-group">
                 <input type="submit" value="Guardar" class="btn btn-success form-control" />
+            </div>
+            <div class="form-group">
+                <a class="btn btn-primary" class="btn btn-success" style="margin-top:10px; margin-left:886px" asp-controller="Accesorios" asp-action="Index">Volver al listado</a>
             </div>
         </div>
     </form>

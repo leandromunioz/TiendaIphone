@@ -1,5 +1,9 @@
-﻿@{
+﻿@model IEnumerable<TiendaIphone.Models.Tienda>
+@using Microsoft.AspNetCore.Identity;
+
+@{
     ViewData["Title"] = "Home Page";
+    Usuario usuario1 = new Usuario();
 }
 
 
@@ -9,6 +13,30 @@
     </div>
 </center>
 <div class="text-center">
-    <h1 class="display-4">¡Bienvenido al sistema!</h1>
-  
+    <h1 class="display-4"> <b>¡Bienvenido @usuario1.UsuarioNombre al sistema!</b> </h1>
+
+    @if (usuario1.UsuarioRol == "SuperAdmin")
+    {
+        @if (Model.Count() < 1)
+        {
+
+            <p style="font-size:25px; color:red"> <br /> <b>Para comenzar a trabajar en su sistema de gestión, primero debe añadir su tienda a la base de datos presionando el botón:"Añadir tienda al sistema"</b></p>
+            <div>
+                <a class="btn btn-success" asp-area="" asp-controller="Tienda" asp-action="Guardar">Añadir tienda al sistema</a>
+            </div>
+        }
+        else
+        {
+            <p style="font-size:25px;"> <br />  <b>¿Desea añadir una nueva sucursal?</b></p>
+            <div>
+                <a class="btn btn-primary" asp-area="" asp-controller="Tienda" asp-action="Guardar">Añadir tienda al sistema</a>
+            </div>
+        }
+
+    }
+
+
+
+
+
 </div>

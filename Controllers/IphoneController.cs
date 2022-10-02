@@ -22,8 +22,15 @@ namespace TiendaIphone.Controllers
         {
             IEnumerable<Iphone> ListadoDeIphone = _context.Iphones;
             return View(ListadoDeIphone);
+
         }
 
+        public IActionResult Vendidos()
+        {
+            IEnumerable<Iphone> ListadoDeIphone = _context.Iphones;
+            return View(ListadoDeIphone);
+
+        }
 
         //Metodo Post
 
@@ -38,6 +45,8 @@ namespace TiendaIphone.Controllers
             if (ModelState.IsValid)
             {
                 var iphones = _context.Iphones;
+                iphone.DisponibilidadIphone = DisponibilidadiPhone.Disponible;
+                iphone.FechaAltaIphone = DateTime.Now;
                 iphones.Add(iphone);
                 _context.SaveChanges();
                 return RedirectToAction("Index");
@@ -112,7 +121,81 @@ namespace TiendaIphone.Controllers
 
 
 
+        //METODO PARA VENDER UN IPHONE. CAMBIA EL ESTADO A AGOTADO Y LO OCULTA DE LA VISTA.
 
+
+        [Authorize(Roles = "admin,SuperAdmin")]
+        public IActionResult Vender(int? id)
+        {
+            if (id == 0 || id == null)
+            {
+                return NotFound("El ID ingresado es inexistente.");
+            }
+            else
+            {
+                var iphones = _context.Iphones.Find(id);
+                if (iphones == null)
+                {
+                    return NotFound("El artículo ingresado es inexistente.");
+                }
+                return View(iphones);
+            }
+
+        }
+
+        [HttpPost]
+        public IActionResult Vender(Iphone iphone)
+        {
+            if (ModelState.IsValid)
+            {
+                var iphones = _context.Iphones;
+                iphone = iphones.Find(iphone.IphoneID);
+                iphone.DisponibilidadIphone = DisponibilidadiPhone.Agotado;
+                iphone.FechaAltaIphone = DateTime.Now;
+                iphones.Update(iphone);
+                _context.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            
+            return View();
+        }
+
+
+        [Authorize(Roles = "admin,SuperAdmin")]
+        public IActionResult Recuperar(int? id)
+        {
+            if (id == 0 || id == null)
+            {
+                return NotFound("El ID ingresado es inexistente.");
+            }
+            else
+            {
+                var iphones = _context.Iphones.Find(id);
+                if (iphones == null)
+                {
+                    return NotFound("El artículo ingresado es inexistente.");
+                }
+                return View(iphones);
+            }
+
+        }
+
+        [HttpPost]
+        public IActionResult Recuperar(Iphone iphone)
+        {
+            if (ModelState.IsValid)
+            {
+                var iphones = _context.Iphones;
+                iphone = iphones.Find(iphone.IphoneID);
+                iphone.DisponibilidadIphone = DisponibilidadiPhone.Disponible;
+                iphone.FechaAltaIphone = DateTime.Now;
+                iphones.Update(iphone);
+                _context.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            return View();
+        }
 
 
 

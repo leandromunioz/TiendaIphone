@@ -2,7 +2,7 @@
 @using Microsoft.AspNetCore.Identity;
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Vendidos";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -13,13 +13,8 @@
     </div>
 </center>
 
-<h1> Sistema de gestión | Accesorios iPhone</h1>
-@if (User.IsInRole("admin") || User.IsInRole("SuperAdmin"))
-{
-    <div>
-        <a class="btn btn-success" asp-area="" asp-controller="Accesorios" asp-action="Guardar">Añadir nuevo Accesorio</a>
-    </div>
-}
+<h1> Registro de ventas | Accesorios </h1>
+
 
 
 <div class="card-body">
@@ -39,14 +34,15 @@
                 <th>@Html.DisplayNameFor(m => m.First().Descripcion)</th>
                 <th>@Html.DisplayNameFor(m => m.First().Precio)</th>
                 <th>@Html.DisplayNameFor(m => m.First().DisponibilidadAccesorio)</th>
+
                 <th>Acciones</th>
             </tr>
             <!--Muestra en la misma tabla los resgistros de las columnas-->
             @foreach (var item in Model)
             {
-
-                @if (item.DisponibilidadAccesorio == Disponibilidad.Disponible)
+                @if (item.DisponibilidadAccesorio == Disponibilidad.Agotado)
                 {
+
                     <tr>
                         <td>@item.TiendaAccesorioID</td>
                         <td>@item.AccesorioID</td>
@@ -58,31 +54,17 @@
                         <td>US$ @item.Precio</td>
                         <td>@item.DisponibilidadAccesorio</td>
 
+
                         <td>
                             <!--Acciones de edicion y eliminado-->
                             @if (User.IsInRole("admin") || User.IsInRole("SuperAdmin"))
                             {
 
+                          
                                 <a asp-route-id="@item.AccesorioID"
-                   asp-action="Editar"
+                   asp-action="Recuperar"
                    asp-asp-controller="Accesorios"
-                   class="btn btn-primary">Editar</a>
-
-                                <a asp-route-id="@item.AccesorioID"
-                   asp-action="Vender"
-                   asp-asp-controller="Accesorios"
-                   class="btn btn-success" style="margin-top:3px">Vender</a>
-
-                            }
-
-                            @if (User.IsInRole("SuperAdmin"))
-
-                            {
-                                <a asp-route-id="@item.AccesorioID"
-                   asp-action="Eliminar"
-                   asp-controller="Accesorios"
-                   class="btn btn-danger" style=" margin-top:3px;">Eliminar</a>
-
+                   class="btn btn-success" style="margin-top:3px">Recuperar artículo</a>
 
                             }
 
@@ -91,7 +73,6 @@
                     </tr>
                 }
 
-
             }
         </table>
 
@@ -99,6 +80,6 @@
     }
     else
     {
-        <p> Aún no se han cargado artículos al sistema.</p>
+        <p> Aún no se han registrado ventas en el sistema.</p>
     }
 </div>

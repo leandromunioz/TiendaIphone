@@ -22,6 +22,13 @@ namespace TiendaIphone.Controllers
             return View(ListadoDeAccesorios);
         }
 
+        public IActionResult Vendidos()
+        {
+            IEnumerable<AccesoriosiPhone> ListadoDeAccesorios = _context.Accesorios;
+            return View(ListadoDeAccesorios);
+
+        }
+
 
         //Metodo Get
         [Authorize(Roles = "admin,SuperAdmin")]
@@ -36,12 +43,16 @@ namespace TiendaIphone.Controllers
             if (ModelState.IsValid)
             {
                 var accesorios = _context.Accesorios;
+                accesorio.DisponibilidadAccesorio = Disponibilidad.Disponible;
+                accesorio.FechaAlta = DateTime.Now;
                 accesorios.Add(accesorio);
                 _context.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View();
         }
+
+
         [Authorize(Roles = "admin,SuperAdmin")]
         public IActionResult Editar(int? id)
         {
@@ -51,7 +62,6 @@ namespace TiendaIphone.Controllers
             }
             else
             {
-                //Devolvemos el iphone
                 var accesorio = _context.Accesorios.Find(id);
                 if (accesorio == null)
                 {
@@ -74,8 +84,9 @@ namespace TiendaIphone.Controllers
             }
             return View();
         }
+
+
         [Authorize(Roles = "SuperAdmin")]
-        [AllowAnonymous]
         public IActionResult Eliminar(int? id)
         {
             if (id == 0 || id == null)
@@ -84,7 +95,6 @@ namespace TiendaIphone.Controllers
             }
             else
             {
-                //Devolvemos el libro
                 var accesorios = _context.Accesorios.Find(id);
                 if (accesorios == null)
                 {
@@ -107,6 +117,80 @@ namespace TiendaIphone.Controllers
             }
             return View();
         }
+
+        //METODO PARA VENDER UN ACCESORIO. CAMBIA EL ESTADO A AGOTADO Y LO MUEVE DE SU VISTA DE INICIO A LA VISTA DE VENTAS.
+
+
+        [Authorize(Roles = "admin,SuperAdmin")]
+        public IActionResult Vender(int? id)
+        {
+            if (id == 0 || id == null)
+            {
+                return NotFound("El ID ingresado es inexistente.");
+            }
+            else
+            {
+                var accesorios = _context.Accesorios.Find(id);
+                if (accesorios == null)
+                {
+                    return NotFound("El artículo ingresado es inexistente.");
+                }
+                return View(accesorios);
+            }
+
+        }
+
+        [HttpPost]
+        public IActionResult Vender(AccesoriosiPhone accesorio)
+        {
+            if (ModelState.IsValid)
+            {
+                var accesorios = _context.Accesorios;
+                accesorio = accesorios.Find(accesorio.AccesorioID);
+                accesorio.DisponibilidadAccesorio = Disponibilidad.Agotado;
+                accesorio.FechaAlta = DateTime.Now;
+                _context.Accesorios.Update(accesorio);
+                _context.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View();
+        }
+
+        [Authorize(Roles = "admin,SuperAdmin")]
+        public IActionResult Recuperar(int? id)
+        {
+            if (id == 0 || id == null)
+            {
+                return NotFound("El ID ingresado es inexistente.");
+            }
+            else
+            {
+                var accesorios = _context.Accesorios.Find(id);
+                if (accesorios == null)
+                {
+                    return NotFound("El artículo ingresado es inexistente.");
+                }
+                return View(accesorios);
+            }
+
+        }
+
+        [HttpPost]
+        public IActionResult Recuperar (AccesoriosiPhone accesorio)
+        {
+            if (ModelState.IsValid)
+            {
+                var accesorios = _context.Accesorios;
+                accesorio = accesorios.Find(accesorio.AccesorioID);
+                accesorio.DisponibilidadAccesorio = Disponibilidad.Disponible;
+                accesorio.FechaAlta = DateTime.Now;
+                _context.Accesorios.Update(accesorio);
+                _context.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View();
+        }
+
 
     }
 }

@@ -13,9 +13,13 @@
 
         public string Descripcion { get; set; }
 
+        public Disponibilidad DisponibilidadAccesorio { get; set; }
+
         public Tienda Tienda { get; set; }
 
         public int TiendaAccesorioID { get; set; }
+
+        public DateTime FechaAlta { get; set; }
 
     }
 
@@ -31,5 +35,12 @@
         Usado,
         Sellado
     }
+
+    public enum Disponibilidad
+    {
+        Disponible,
+        Agotado
+    }
+
 }
 

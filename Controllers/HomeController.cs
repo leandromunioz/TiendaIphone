@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
+using TiendaIphone.Context;
 using TiendaIphone.Models;
 
 namespace TiendaIphone.Controllers
@@ -9,15 +11,20 @@ namespace TiendaIphone.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly TiendaContext _context;
 
-        public HomeController(ILogger<HomeController> logger)
+
+        public HomeController(ILogger<HomeController> logger , TiendaContext context)
         {
             _logger = logger;
+            _context = context;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var tiendas = await _context.Tienda.ToListAsync();
+
+            return View(tiendas);
         }
 
         public IActionResult Privacy()

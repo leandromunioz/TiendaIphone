@@ -2,7 +2,7 @@
 @using Microsoft.AspNetCore.Identity;
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Vendidos";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -13,13 +13,8 @@
     </div>
 </center>
 
-<h1> Sistema de gestión | iPhones</h1>
-@if (User.IsInRole("admin") || User.IsInRole("SuperAdmin"))
-{
-    <div>
-        <a class="btn btn-success" asp-area="" asp-controller="Iphone" asp-action="Guardar">Añadir nuevo iPhone</a>
-    </div>
-}
+<h1> Registro de ventas | iPhones</h1>
+
 
 
 <div class="card-body">
@@ -45,7 +40,7 @@
             <!--Muestra en la misma tabla los resgistros de las columnas-->
             @foreach (var item in Model)
             {
-                @if (item.DisponibilidadIphone == DisponibilidadiPhone.Disponible)
+                @if (item.DisponibilidadIphone == DisponibilidadiPhone.Agotado)
                 {
 
                     <tr>
@@ -66,27 +61,12 @@
                             {
 
                                 <a asp-route-id="@item.IphoneID"
-                   asp-action="Editar"
+                   asp-action="Recuperar"
                    asp-asp-controller="Iphone"
-                   class="btn btn-primary">Editar</a>
-
-                                <a asp-route-id="@item.IphoneID"
-                   asp-action="Vender"
-                   asp-asp-controller="Iphone"
-                   class="btn btn-success" style=" margin-top:3px">Vender</a>
+                   class="btn btn-success" style=" margin-top:3px">Recuperar artículo</a>
                             }
 
-                            @if (User.IsInRole("SuperAdmin"))
 
-                            {
-                                <a asp-route-id="@item.IphoneID"
-                   asp-action="Eliminar"
-                   asp-controller="Iphone"
-                   class="btn btn-danger" style="margin-top:3px; ">Eliminar</a>
-
-
-
-                            }
 
                         </td>
 
@@ -100,6 +80,6 @@
     }
     else
     {
-        <p> Aún no se han cargado artículos al sistema.</p>
+        <p> Aún no se han registrado ventas en el sistema.</p>
     }
 </div>

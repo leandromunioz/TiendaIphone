@@ -15,8 +15,13 @@
 
         public Tienda Tienda { get; set; }
 
-        public int TiendaID { get; set; }   
-        
+        public int TiendaID { get; set; }
+
+        public DisponibilidadiPhone DisponibilidadIphone { get; set; }
+
+        public DateTime FechaAltaIphone { get; set; }
+
+
     }
 
     public enum Color
@@ -35,5 +40,10 @@
         Sellado
     }
 
-    
+    public enum DisponibilidadiPhone
+    {
+        Disponible,
+        Agotado
+    }
+
 }

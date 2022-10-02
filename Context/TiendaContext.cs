@@ -43,6 +43,8 @@ namespace TiendaIphone.Context
                 iphone.Property(p => p.EstadoIphone);
                 iphone.Property(p => p.ColorIphone);
                 iphone.Property(p => p.Descripcion).HasMaxLength(350);
+                iphone.Property(p => p.FechaAltaIphone);
+                iphone.Property(p => p.DisponibilidadIphone);
                 iphone.Property(p => p.Precio);
                 iphone.HasData(iphoneInit);
 
@@ -63,6 +65,8 @@ namespace TiendaIphone.Context
                 accesorios.Property(p => p.ColorAccesorio);
                 accesorios.Property(p => p.Descripcion).HasMaxLength(350);
                 accesorios.Property(p => p.Precio);
+                accesorios.Property(p => p.FechaAlta);
+                accesorios.Property(p => p.DisponibilidadAccesorio);
                 accesorios.HasData(accesoriosInit);
 
 

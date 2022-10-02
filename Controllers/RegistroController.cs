@@ -1,13 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using TiendaIphone.Models;
-using TiendaIphone.Logica;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using System.Security.Claims;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.EntityFrameworkCore;
 using TiendaIphone.Context;
-using System.Linq;
 
 namespace TiendaIphone.Controllers
 {
@@ -48,8 +41,17 @@ namespace TiendaIphone.Controllers
 
                     }
                 }
-                usuario1.UsuarioRol = "admin";
-                if(usuario1.UsuarioEmail is not null && usuario1.UsuarioNombre is not null && usuario1.UsuarioContrasenia is not null)
+                if (usuarios.Count() == 0)
+                {
+                    usuario1.UsuarioRol = "SuperAdmin";
+
+                }
+                else
+                {
+                    usuario1.UsuarioRol = "admin";
+                }
+
+                if (usuario1.UsuarioEmail is not null && usuario1.UsuarioNombre is not null && usuario1.UsuarioContrasenia is not null)
                 {
                     usuarios.Add(usuario1);
 
