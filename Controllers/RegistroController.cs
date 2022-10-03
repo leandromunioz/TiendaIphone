@@ -8,11 +8,19 @@ namespace TiendaIphone.Controllers
     {
         private readonly TiendaContext _context;
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="context"></param>
         public RegistroController(TiendaContext context)
         {
             _context = context; 
         }
 
+        /// <summary>
+        /// Metodo que devuelve la vista de la sección de registro
+        /// </summary>
+        /// <returns></returns>
         public IActionResult Index()
         {
             return View();
@@ -27,6 +35,12 @@ namespace TiendaIphone.Controllers
         }
 
 
+        /// <summary>
+        /// Método que carga los datos de registro del usuario, si el usuario es el primero en registrarse en la base de datos, ese usuario b
+        /// va a ser un SuperAdmin, teniendo todas las funcionalidades del sistema desbloqueadas para él. Los demás usuarios serán admin y tendrán funciones limitadas.
+        /// </summary>
+        /// <param name="usuario1"></param>
+        /// <returns></returns>
         [HttpPost]
         public IActionResult Guardar(Usuario usuario1)
         {

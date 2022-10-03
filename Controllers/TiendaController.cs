@@ -27,6 +27,12 @@ namespace TiendaIphone.Controllers
             return View();
         }
 
+        
+        /// <summary>
+        /// Metodo que añade una nueva tienda
+        /// </summary>
+        /// <param name="tienda1"></param>
+        /// <returns></returns>
         [HttpPost]
         public IActionResult Guardar(Tienda tienda1)
         {

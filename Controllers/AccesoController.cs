@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using TiendaIphone.Context;
 using System.Linq;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace TiendaIphone.Controllers
 {
@@ -69,11 +70,15 @@ namespace TiendaIphone.Controllers
             }
             
         }
-        //Salir del home de vuelta ala vista login
+        //Método que vuelve a la vista login
         public async Task<IActionResult> Salir()
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToAction("Index", "Acceso");
         }
+
+
+   
+
     }
 }

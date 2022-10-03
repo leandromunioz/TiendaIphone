@@ -1,6 +1,53 @@
-﻿@{
+﻿@*@{
     ViewData["Title"] = "Privacy Policy";
 }
 <h1>@ViewData["Title"]</h1>
 
 <p>Use this page to detail your site's privacy policy.</p>
+*@
+@model IEnumerable<TiendaIphone.Models.Iphone>
+@using Microsoft.AspNetCore.Identity;
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<table id="table_id" class="display">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(m => m.First().TiendaID)</th>
+            <th>@Html.DisplayNameFor(m => m.First().IphoneID)</th>
+            <th>@Html.DisplayNameFor(m => m.First().FechaAltaIphone)</th>
+            <th>@Html.DisplayNameFor(m => m.First().Modelo)</th>
+            <th>@Html.DisplayNameFor(m => m.First().EstadoIphone)</th>
+            <th>@Html.DisplayNameFor(m => m.First().ColorIphone)</th>
+            <th>@Html.DisplayNameFor(m => m.First().Descripcion)</th>
+            <th>@Html.DisplayNameFor(m => m.First().Precio)</th>
+            <th>@Html.DisplayNameFor(m => m.First().DisponibilidadIphone)</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var item in Model)
+        {
+
+            <tr>
+
+                <td>@item.TiendaID</td>
+                <td>@item.IphoneID</td>
+                <td>@item.FechaAltaIphone.ToShortDateString()</td>
+                <td>@item.Modelo</td>
+                <td>@item.EstadoIphone</td>
+                <td>@item.ColorIphone</td>
+                <td>@item.Descripcion</td>
+                <td>US$ @item.Precio</td>
+                <td>@item.DisponibilidadIphone</td>
+
+            </tr>
+        }
+
+
+    </tbody>
+</table>
