@@ -4,11 +4,7 @@ using TiendaIphone.Logica;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using System.Security.Claims;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.EntityFrameworkCore;
 using TiendaIphone.Context;
-using System.Linq;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace TiendaIphone.Controllers
 {
@@ -21,6 +17,10 @@ namespace TiendaIphone.Controllers
             _context = context;
         }
 
+        /// <summary>
+        /// Método que te muestra la vista del index 
+        /// </summary>
+        /// <returns></returns>
         public IActionResult Index()
         {
             return View();
@@ -70,7 +70,7 @@ namespace TiendaIphone.Controllers
             }
             
         }
-        //Método que vuelve a la vista login
+        //Método que vuelve a la vista login, cierra la sesión y las autorizaciones
         public async Task<IActionResult> Salir()
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);

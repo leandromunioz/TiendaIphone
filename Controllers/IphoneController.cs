@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Data;
 using TiendaIphone.Context;
 using TiendaIphone.Models;
@@ -26,9 +27,9 @@ namespace TiendaIphone.Controllers
         /// Método que muestra el listado de accesorios en stock
         /// </summary>
         /// <returns> Devuelve a la vista el listado de accesorios</returns>
-        public IActionResult Index()
+        public async Task <IActionResult> Index()
         {
-            IEnumerable<Iphone> ListadoDeIphone = _context.Iphones;
+            IEnumerable<Iphone> ListadoDeIphone = await _context.Iphones.ToListAsync();
             return View(ListadoDeIphone);
 
         }
@@ -37,9 +38,9 @@ namespace TiendaIphone.Controllers
         /// Método que muestra el listado de accesorios vendidos
         /// </summary>
         /// <returns>Devuelve a la vista el listado de accesorios vendidos</returns>
-        public IActionResult Vendidos()
+        public async Task <IActionResult>  Vendidos()
         {
-            IEnumerable<Iphone> ListadoDeIphone = _context.Iphones;
+            IEnumerable<Iphone> ListadoDeIphone = await _context.Iphones.ToListAsync();
             return View(ListadoDeIphone);
 
         }

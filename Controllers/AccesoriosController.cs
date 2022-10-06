@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Data;
 using TiendaIphone.Context;
 using TiendaIphone.Models;
@@ -25,9 +26,9 @@ namespace TiendaIphone.Controllers
         /// Método que muestra el listado de accesorios en stock
         /// </summary>
         /// <returns> Devuelve a la vista el listado de accesorios</returns>
-        public IActionResult Index()
+        public async Task <IActionResult> Index()
         {
-            IEnumerable<AccesoriosiPhone> ListadoDeAccesorios = _context.Accesorios;
+            IEnumerable<AccesoriosiPhone> ListadoDeAccesorios = await _context.Accesorios.ToListAsync();
             return View(ListadoDeAccesorios);
         }
 
@@ -35,9 +36,9 @@ namespace TiendaIphone.Controllers
         /// Método que muestra el listado de accesorios vendidos
         /// </summary>
         /// <returns>Devuelve a la vista el listado de accesorios vendidos</returns>
-        public IActionResult Vendidos()
+        public async Task <IActionResult> Vendidos()
         {
-            IEnumerable<AccesoriosiPhone> ListadoDeAccesorios = _context.Accesorios;
+            IEnumerable<AccesoriosiPhone> ListadoDeAccesorios = await _context.Accesorios.ToListAsync();
             return View(ListadoDeAccesorios);
 
         }
@@ -61,15 +62,15 @@ namespace TiendaIphone.Controllers
        /// <param name="accesorio"></param>
        /// <returns></returns>
         [HttpPost]
-        public IActionResult Guardar(AccesoriosiPhone accesorio)
+        public async Task <IActionResult> Guardar(AccesoriosiPhone accesorio)
         {
             if (ModelState.IsValid)
             {
                 var accesorios = _context.Accesorios;
                 accesorio.DisponibilidadAccesorio = Disponibilidad.Disponible;
                 accesorio.FechaAlta = DateTime.Now;
-                accesorios.Add(accesorio);
-                _context.SaveChanges();
+                await accesorios.AddAsync(accesorio);
+                await _context.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
             return View();

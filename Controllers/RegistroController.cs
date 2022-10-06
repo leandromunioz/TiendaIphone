@@ -27,12 +27,6 @@ namespace TiendaIphone.Controllers
         }
 
 
-        //Metodo Post
-
-        public IActionResult Guardar()
-        {
-            return View();
-        }
 
 
         /// <summary>
@@ -51,6 +45,7 @@ namespace TiendaIphone.Controllers
                 {
                    if (usuario.UsuarioEmail == usuario1.UsuarioEmail)
                     {
+                        
                         return RedirectToAction("Index");
 
                     }
