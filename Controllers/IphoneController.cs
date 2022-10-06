@@ -63,15 +63,15 @@ namespace TiendaIphone.Controllers
         /// <param name="accesorio"></param>
         /// <returns></returns>
         [HttpPost]
-        public IActionResult Guardar(Iphone iphone)
+        public async Task <IActionResult>  Guardar(Iphone iphone)
         {
             if (ModelState.IsValid)
             {
                 var iphones = _context.Iphones;
                 iphone.DisponibilidadIphone = DisponibilidadiPhone.Disponible;
                 iphone.FechaAltaIphone = DateTime.Now;
-                iphones.Add(iphone);
-                _context.SaveChanges();
+                await iphones.AddAsync(iphone);
+                await _context.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
             return View();
@@ -132,7 +132,6 @@ namespace TiendaIphone.Controllers
             }
             else
             {
-                //Devolvemos el libro
                 var iphones = _context.Iphones.Find(id);
                 if (iphones == null)
                 {
@@ -149,13 +148,13 @@ namespace TiendaIphone.Controllers
         /// <param name="accesorio"></param>
         /// <returns>Devuelve a la vista del index con el listado actualizado</returns>
         [HttpPost]
-        public IActionResult Eliminar(Iphone iphone)
+        public async Task <IActionResult> Eliminar(Iphone iphone)
         {
             if (ModelState.IsValid)
             {
                 var libros = _context.Iphones;
                 libros.Remove(iphone);
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
             return View();
@@ -191,16 +190,16 @@ namespace TiendaIphone.Controllers
         /// <returns></returns>
 
         [HttpPost]
-        public IActionResult Vender(Iphone iphone)
+        public async Task <IActionResult> Vender(Iphone iphone)
         {
             if (ModelState.IsValid)
             {
                 var iphones = _context.Iphones;
-                iphone = iphones.Find(iphone.IphoneID);
+                iphone = await iphones.FindAsync(iphone.IphoneID);
                 iphone.DisponibilidadIphone = DisponibilidadiPhone.Agotado;
                 iphone.FechaAltaIphone = DateTime.Now;
                 iphones.Update(iphone);
-                _context.SaveChanges();
+               await _context.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
             
@@ -209,7 +208,7 @@ namespace TiendaIphone.Controllers
 
 
         [Authorize(Roles = "admin,SuperAdmin")]
-        public IActionResult Recuperar(int? id)
+        public async Task <IActionResult> Recuperar(int? id)
         {
             if (id == 0 || id == null)
             {
@@ -217,7 +216,7 @@ namespace TiendaIphone.Controllers
             }
             else
             {
-                var iphones = _context.Iphones.Find(id);
+                var iphones = await _context.Iphones.FindAsync(id);
                 if (iphones == null)
                 {
                     return NotFound("El artículo ingresado es inexistente.");
@@ -234,16 +233,16 @@ namespace TiendaIphone.Controllers
         /// <returns></returns>
 
         [HttpPost]
-        public IActionResult Recuperar(Iphone iphone)
+        public async Task <IActionResult> Recuperar(Iphone iphone)
         {
             if (ModelState.IsValid)
             {
                 var iphones = _context.Iphones;
-                iphone = iphones.Find(iphone.IphoneID);
+                iphone = await iphones.FindAsync(iphone.IphoneID);
                 iphone.DisponibilidadIphone = DisponibilidadiPhone.Disponible;
                 iphone.FechaAltaIphone = DateTime.Now;
                 iphones.Update(iphone);
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 

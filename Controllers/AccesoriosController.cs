@@ -26,7 +26,7 @@ namespace TiendaIphone.Controllers
         /// Método que muestra el listado de accesorios en stock
         /// </summary>
         /// <returns> Devuelve a la vista el listado de accesorios</returns>
-        public async Task <IActionResult> Index()
+        public async Task<IActionResult> Index()
         {
             IEnumerable<AccesoriosiPhone> ListadoDeAccesorios = await _context.Accesorios.ToListAsync();
             return View(ListadoDeAccesorios);
@@ -36,7 +36,7 @@ namespace TiendaIphone.Controllers
         /// Método que muestra el listado de accesorios vendidos
         /// </summary>
         /// <returns>Devuelve a la vista el listado de accesorios vendidos</returns>
-        public async Task <IActionResult> Vendidos()
+        public async Task<IActionResult> Vendidos()
         {
             IEnumerable<AccesoriosiPhone> ListadoDeAccesorios = await _context.Accesorios.ToListAsync();
             return View(ListadoDeAccesorios);
@@ -56,13 +56,13 @@ namespace TiendaIphone.Controllers
         }
 
 
-       /// <summary>
-       /// Método que carga los datos de los productos al sistema y añade el objeto con sus datos cargados
-       /// </summary>
-       /// <param name="accesorio"></param>
-       /// <returns></returns>
+        /// <summary>
+        /// Método que carga los datos de los productos al sistema y añade el objeto con sus datos cargados
+        /// </summary>
+        /// <param name="accesorio"></param>
+        /// <returns></returns>
         [HttpPost]
-        public async Task <IActionResult> Guardar(AccesoriosiPhone accesorio)
+        public async Task<IActionResult> Guardar(AccesoriosiPhone accesorio)
         {
             if (ModelState.IsValid)
             {
@@ -107,14 +107,14 @@ namespace TiendaIphone.Controllers
         /// <param name="accesorio"></param>
         /// <returns>devuelve la vista del index</returns>
         [HttpPost]
-        public IActionResult Editar(AccesoriosiPhone accesorio)
+        public async Task<IActionResult> Editar(AccesoriosiPhone accesorio)
         {
             if (ModelState.IsValid)
             {
 
                 var accesorios = _context.Accesorios;
                 accesorios.Update(accesorio);
-                _context.SaveChanges();
+               await _context.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
             return View();
@@ -122,7 +122,7 @@ namespace TiendaIphone.Controllers
 
 
         [Authorize(Roles = "SuperAdmin")]
-        public IActionResult Eliminar(int? id)
+        public async Task <IActionResult>  Eliminar(int? id)
         {
             if (id == 0 || id == null)
             {
@@ -130,7 +130,7 @@ namespace TiendaIphone.Controllers
             }
             else
             {
-                var accesorios = _context.Accesorios.Find(id);
+                var accesorios = await _context.Accesorios.FindAsync(id);
                 if (accesorios == null)
                 {
                     return NotFound("El artículo ingresado es inexistente.");
@@ -202,7 +202,7 @@ namespace TiendaIphone.Controllers
             return View();
         }
 
-       
+
         [Authorize(Roles = "admin,SuperAdmin")]
         public IActionResult Recuperar(int? id)
         {
@@ -228,7 +228,7 @@ namespace TiendaIphone.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpPost]
-        public IActionResult Recuperar (AccesoriosiPhone accesorio)
+        public IActionResult Recuperar(AccesoriosiPhone accesorio)
         {
             if (ModelState.IsValid)
             {
